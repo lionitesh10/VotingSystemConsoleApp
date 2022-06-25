@@ -116,6 +116,7 @@
                         DisplayVotes();
                         break;
                     case 8:
+                        WelcomeController();
                         loopStatus = 0;
                         break;
                     default:
@@ -123,7 +124,6 @@
                         break;
                 }
             }
-            WelcomeController();
         }
         public void AdminHomeController()
         {

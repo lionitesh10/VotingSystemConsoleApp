@@ -7,7 +7,14 @@
         {
             string WelcomeMessage = "Welcome to Console Voting System".ToUpper();
             Console.WriteLine(".........." + WelcomeMessage + " ..........");
-            LoginController();
+            Console.WriteLine("1. Login ");
+            Console.WriteLine("2. Exit");
+            int ch = int.Parse(Console.ReadLine());
+            if (ch == 1)
+            {
+                LoginController();
+            }
+
         }
         public void LoginController()
         {
@@ -39,79 +46,84 @@
         }
         public void AdminMenus()
         {
+            int loopStatus = 1;
             int choice;
-            Console.WriteLine("1. To Add a Candidate :: ");
-            Console.WriteLine("2. To Add a Voter :: ");
-            Console.WriteLine("3. To Update a Candidate :: ");
-            Console.WriteLine("4. To Update a Voter :: ");
-            Console.WriteLine("5. To Delete a Candidate :: ");
-            Console.WriteLine("6. To Delete a Voter :: ");
-            Console.WriteLine("7. Display Votes :: ");
-            Console.WriteLine("8. Logout");
-            try
+            while (loopStatus != 0)
             {
-                choice = int.Parse(Console.ReadLine());
-            }
-            catch (Exception)
-            {
-                choice = 0;
-            }
+                Console.WriteLine("1. To Add a Candidate :: ");
+                Console.WriteLine("2. To Add a Voter :: ");
+                Console.WriteLine("3. To Update a Candidate :: ");
+                Console.WriteLine("4. To Update a Voter :: ");
+                Console.WriteLine("5. To Delete a Candidate :: ");
+                Console.WriteLine("6. To Delete a Voter :: ");
+                Console.WriteLine("7. Display Votes :: ");
+                Console.WriteLine("8. Logout");
+                try
+                {
+                    choice = int.Parse(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    choice = 0;
+                }
 
-            switch (choice)
-            {
-                case 1:
-                    AddCandidate(1);
-                    break;
-                case 2:
-                    AddCandidate(0);
-                    break;
-                case 3:
-                    FileHelper Filehelper = new FileHelper();
-                    int status = Filehelper.DisplayCandidates();
-                    if (status == 1)
-                    {
-                        UpdateUser(1);
-                        Filehelper.DisplayCandidates();
-                    }
-                    break;
-                case 4:
-                    FileHelper FileHelper1 = new FileHelper();
-                    int status1 = FileHelper1.DisplayVoters();
-                    if (status1 == 1)
-                    {
-                        UpdateUser(0);
-                        FileHelper1.DisplayVoters();
-                    }
-                    break;
-                case 5:
-                    FileHelper FileHelper2 = new FileHelper();
-                    int status3 = FileHelper2.DisplayCandidates();
-                    if (status3 == 1)
-                    {
-                        DeleteUser(1);
-                        FileHelper2.DisplayCandidates();
-                    }
-                    break;
-                case 6:
-                    FileHelper FileHelper3 = new FileHelper();
-                    int status4 = FileHelper3.DisplayVoters();
-                    if (status4 == 1)
-                    {
-                        DeleteUser(0);
-                        FileHelper3.DisplayVoters();
-                    }
-                    break;
-                case 7:
-                    Console.WriteLine("Vote Display");
-                    DisplayVotes();
-                    break;
-                case 8:
-                    Console.WriteLine("Logout");
-                    break;
-                default:
-                    Console.WriteLine("Invalid.. Choice !! ");
-                    break;
+                switch (choice)
+                {
+                    case 1:
+                        AddCandidate(1);
+                        break;
+                    case 2:
+                        AddCandidate(0);
+                        break;
+                    case 3:
+                        FileHelper Filehelper = new FileHelper();
+                        int status = Filehelper.DisplayCandidates();
+                        if (status == 1)
+                        {
+                            UpdateUser(1);
+                            Filehelper.DisplayCandidates();
+                        }
+                        break;
+                    case 4:
+                        FileHelper FileHelper1 = new FileHelper();
+                        int status1 = FileHelper1.DisplayVoters();
+                        if (status1 == 1)
+                        {
+                            UpdateUser(0);
+                            FileHelper1.DisplayVoters();
+                        }
+                        break;
+                    case 5:
+                        FileHelper FileHelper2 = new FileHelper();
+                        int status3 = FileHelper2.DisplayCandidates();
+                        if (status3 == 1)
+                        {
+                            DeleteUser(1);
+                            FileHelper2.DisplayCandidates();
+                        }
+                        break;
+                    case 6:
+                        FileHelper FileHelper3 = new FileHelper();
+                        int status4 = FileHelper3.DisplayVoters();
+                        if (status4 == 1)
+                        {
+                            DeleteUser(0);
+                            FileHelper3.DisplayVoters();
+                        }
+                        break;
+                    case 7:
+                        Console.WriteLine("Vote Display");
+                        DisplayVotes();
+                        break;
+                    case 8:
+                        loopStatus = 0;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid.. Choice !! ");
+                        break;
+                }
             }
+            WelcomeController();
         }
         public void AdminHomeController()
         {
@@ -228,7 +240,7 @@
             if (loggedInUser.VoteLimit == 0)
             {
                 Console.WriteLine("You have already voted.. !!! ");
-
+                WelcomeController();
             }
             else
             {
@@ -257,6 +269,7 @@
                         fileHelper.CandidateVotesInsertion(loggedInUser, candidate);
                         LinqHelper linq1 = new LinqHelper();
                         fileHelper.UpdateUsers(linq1.GetAfterLost(loggedInUser.Id));
+                        WelcomeController();
                     }
                     catch (Exception)
                     {
@@ -274,7 +287,7 @@
             //{
             //    Console.WriteLine(vote.CandidateId);
             //}
-            LinqHelper linqHelper=new LinqHelper();
+            LinqHelper linqHelper = new LinqHelper();
             linqHelper.DisplayCandidateVotes(voteCounts);
         }
 

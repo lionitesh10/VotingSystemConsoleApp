@@ -1,0 +1,2 @@
+1,Admin,22,Koteshwor,admin,admin123,2,1
+2,Nitesh,22,ktm,nitesh123,nitesh123,1,0

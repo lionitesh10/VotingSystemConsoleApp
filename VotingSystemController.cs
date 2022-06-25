@@ -103,6 +103,7 @@
                     break;
                 case 7:
                     Console.WriteLine("Vote Display");
+                    DisplayVotes();
                     break;
                 case 8:
                     Console.WriteLine("Logout");
@@ -267,7 +268,14 @@
         }
         public void DisplayVotes()
         {
-            
+            FileHelper fileHelper = new FileHelper();
+            List<VoteCounts> voteCounts = fileHelper.CandidateVotesLoad();
+            //foreach (VoteCounts vote in voteCounts)
+            //{
+            //    Console.WriteLine(vote.CandidateId);
+            //}
+            LinqHelper linqHelper=new LinqHelper();
+            linqHelper.DisplayCandidateVotes(voteCounts);
         }
 
     }

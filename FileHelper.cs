@@ -4,6 +4,7 @@ namespace VotingSystemConsoleApp
     class FileHelper
     {
         List<UsersModel> users=new List<UsersModel> ();
+        List<VoteCounts> Votes=new List<VoteCounts> ();
         public List<UsersModel> GetUsersDataFromFile()
         {
             users.Clear ();
@@ -149,9 +150,27 @@ namespace VotingSystemConsoleApp
             Console.WriteLine("Vote Successfully Updated");
         }
 
-        public void CandidateVotesLoad()
+        public List<VoteCounts> CandidateVotesLoad()
         {
-
+            Votes.Clear();
+            FileStream fileStream = new FileStream("..//..//..//AppFiles//candidatesVotes.txt", FileMode.Open, FileAccess.Read);
+            StreamReader reader = new StreamReader(fileStream);
+            reader.BaseStream.Seek(0, SeekOrigin.Begin);
+            string str = reader.ReadLine();
+            while (str != null)
+            {
+                string[] values = str.Split(',');
+                int VoterId = int.Parse(values[0]);
+                int CandidateId = int.Parse(values[1]);
+                VoteCounts voteCounts = new VoteCounts();
+                voteCounts.VoterId = VoterId;
+                voteCounts.CandidateId = CandidateId;
+                Votes.Add(voteCounts);
+                str = reader.ReadLine();
+            }
+            reader.Close();
+            fileStream.Close();
+            return Votes;
         }
     }
 }

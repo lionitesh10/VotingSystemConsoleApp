@@ -53,5 +53,31 @@ namespace VotingSystemConsoleApp
             return users;
         }
 
+        public void DisplayCandidateVotes(List<VoteCounts> voteCounts)
+        {
+            FileHelper fileHelper=new FileHelper();
+            List<UsersModel> users = fileHelper.GetUsersDataFromFile();
+
+            var NamesVotes = from vote in voteCounts
+                             join user in users
+                             on vote.CandidateId equals user.Id
+                             group vote by vote.CandidateId into namevotes
+                             select new
+                             {
+                                 votes = namevotes.Count(),
+                                 NameId = namevotes.Key
+                             };
+            foreach(var namevotes in NamesVotes)
+            {
+                UsersModel user1 = null;
+                foreach(var user in users)
+                {
+                    if(user.Id==namevotes.NameId)
+                        user1 = user;
+                }
+                Console.WriteLine("Name :: {0} and Votes :: {1} ",user1.Name,namevotes.votes);
+            }
+        }
+
     }
 }

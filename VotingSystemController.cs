@@ -14,6 +14,10 @@
             {
                 LoginController();
             }
+            else
+            {
+                Environment.Exit(0);
+            }
 
         }
         public void LoginController()
@@ -77,38 +81,38 @@
                         break;
                     case 3:
                         FileHelper Filehelper = new FileHelper();
-                        int status = Filehelper.DisplayCandidates();
+                        int status = DisplayCandidates();
                         if (status == 1)
                         {
                             UpdateUser(1);
-                            Filehelper.DisplayCandidates();
+                            DisplayCandidates();
                         }
                         break;
                     case 4:
                         FileHelper FileHelper1 = new FileHelper();
-                        int status1 = FileHelper1.DisplayVoters();
+                        int status1 = DisplayVoters();
                         if (status1 == 1)
                         {
                             UpdateUser(0);
-                            FileHelper1.DisplayVoters();
+                            DisplayVoters();
                         }
                         break;
                     case 5:
                         FileHelper FileHelper2 = new FileHelper();
-                        int status3 = FileHelper2.DisplayCandidates();
+                        int status3 = DisplayCandidates();
                         if (status3 == 1)
                         {
                             DeleteUser(1);
-                            FileHelper2.DisplayCandidates();
+                            DisplayCandidates();
                         }
                         break;
                     case 6:
                         FileHelper FileHelper3 = new FileHelper();
-                        int status4 = FileHelper3.DisplayVoters();
+                        int status4 = DisplayVoters();
                         if (status4 == 1)
                         {
                             DeleteUser(0);
-                            FileHelper3.DisplayVoters();
+                            DisplayVoters();
                         }
                         break;
                     case 7:
@@ -290,6 +294,57 @@
             LinqHelper linqHelper = new LinqHelper();
             linqHelper.DisplayCandidateVotes(voteCounts);
         }
+
+        public void DisplayUsers()
+        {
+            FileHelper fileHelper = new FileHelper();
+            List<UsersModel> users = fileHelper.GetUsersDataFromFile();
+            foreach (UsersModel user in users)
+            {
+                Console.WriteLine("Id = {0} , Name = {1} , Age = {2} , Address = {3} , Username = {4} , Role {5} ", user.Id, user.Name, user.Age, user.Address, user.UserName, user.Role);
+            }
+        }
+
+        public int DisplayCandidates()
+        {
+            LinqHelper linqHelper = new LinqHelper();
+            List<UsersModel> users = linqHelper.GetList(1);
+            if (users.Count != 0)
+            {
+                Console.WriteLine("Candidates List :: ");
+                foreach (UsersModel user in users)
+                {
+                    Console.WriteLine("Id = {0} , Name = {1} , Age = {2} , Address = {3} , Username = {4} ", user.Id, user.Name, user.Age, user.Address, user.UserName);
+                }
+                return 1;
+            }
+            else
+            {
+                Console.WriteLine("No Candidates :: ");
+                return 0;
+            }
+        }
+
+        public int DisplayVoters()
+        {
+            LinqHelper linqHelper = new LinqHelper();
+            List<UsersModel> users = linqHelper.GetList(0);
+            if (users.Count != 0)
+            {
+                Console.WriteLine("Voters List :: ");
+                foreach (UsersModel user in users)
+                {
+                    Console.WriteLine("Id = {0} , Name = {1} , Age = {2} , Address = {3} , Username = {4} ", user.Id, user.Name, user.Age, user.Address, user.UserName);
+                }
+                return 1;
+            }
+            else
+            {
+                Console.WriteLine("No Voters ");
+                return 0;
+            }
+        }
+
 
     }
 }

@@ -32,56 +32,7 @@ namespace VotingSystemConsoleApp
             fileStream.Close();
             return users;
         }
-        public void DisplayUsers()
-        {
-            FileHelper fileHelper = new FileHelper();
-            List<UsersModel> users = fileHelper.GetUsersDataFromFile();
-            foreach(UsersModel user in users)
-            {
-                Console.WriteLine("Id = {0} , Name = {1} , Age = {2} , Address = {3} , Username = {4} , Role {5} ",user.Id,user.Name,user.Age,user.Address,user.UserName,user.Role);
-            }
-        }
-
-        public int DisplayCandidates()
-        {
-            LinqHelper linqHelper= new LinqHelper();
-            List<UsersModel> users = linqHelper.GetList(1);
-            if (users.Count != 0)
-            {
-                Console.WriteLine("Candidates List :: ");
-                foreach (UsersModel user in users)
-                {
-                    Console.WriteLine("Id = {0} , Name = {1} , Age = {2} , Address = {3} , Username = {4} ", user.Id, user.Name, user.Age, user.Address, user.UserName);
-                }
-                return 1;
-            }
-            else
-            {
-                Console.WriteLine("No Candidates :: ");
-                return 0;
-            }
-        }
-
-        public int DisplayVoters()
-        {
-            LinqHelper linqHelper = new LinqHelper();
-            List<UsersModel> users = linqHelper.GetList(0);
-            if (users.Count != 0)
-            {
-                Console.WriteLine("Voters List :: ");
-                foreach (UsersModel user in users)
-                {
-                    Console.WriteLine("Id = {0} , Name = {1} , Age = {2} , Address = {3} , Username = {4} ", user.Id, user.Name, user.Age, user.Address, user.UserName);
-                }
-                return 1;
-            }
-            else
-            {
-                Console.WriteLine("No Voters ");
-                return 0;
-            }
-        }
-
+       
         public void AddCandidate(UsersModel user)
         {
             FileStream fileStream = new FileStream("..//..//..//AppFiles//users.txt", FileMode.Append,FileAccess.Write);

@@ -1,9 +1,5 @@
 ﻿namespace VotingSystemConsoleApp
 {
-    class Models
-    {
-    }
-
     public class UsersModel
     {
         public int Id { get; set; }
@@ -14,8 +10,6 @@
         public string UserName { get; set; }
         public string Password { get; set; }
         public int Role { get; set; }
-        public int Votes { get; set; }
-        public float Percentage { get; set; }
 
         public UsersModel(int Id, string Name, int Age, string Address,string Username, string Password,int Role)
         {

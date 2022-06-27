@@ -3,3 +3,4 @@
 3,Rabee,23,Sukedhara,rabee123,rabee123,1,0
 5,Prabhat,22,Basundhara,prabhat,prabhat123,1,0
 6,Yujan,22,kapan,yujan123,yujan123,0,0
+10,Yujan,22,kapan,yujan,yujan123,0,0

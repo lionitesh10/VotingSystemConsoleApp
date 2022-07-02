@@ -79,5 +79,20 @@ namespace VotingSystemConsoleApp
             }
         }
 
+        public int CheckIfUserExists(UsersModel User)
+        {
+            FileHelper FileHelper1 = new FileHelper();
+            List<UsersModel> Users = FileHelper1.GetUsersDataFromFile();
+            var result=from user in Users where user.Id == User.Id || user.UserName==User.UserName select user;
+            if (result.Count() == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
     }
 }

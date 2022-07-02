@@ -154,8 +154,18 @@
                 string Password = Console.ReadLine();
                 UsersModel user1 = new UsersModel(Cid, Name, Age, Address, Username, Password, role);
                 FileHelper fileHelper = new FileHelper();
-                fileHelper.AddCandidate(user1);
-                AdminMenus();
+                LinqHelper LinqHelper1=new LinqHelper();
+                int userStatus=LinqHelper1.CheckIfUserExists(user1);
+                if (userStatus == 1)
+                {
+                    fileHelper.AddCandidate(user1);
+                    AdminMenus();
+                }
+                else
+                {
+                    Console.WriteLine("User already exists with this id or username try another");
+                    AddCandidate(role);
+                }
             }
             catch (Exception)
             {

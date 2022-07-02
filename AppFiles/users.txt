@@ -4,3 +4,5 @@
 5,Prabhat,22,Basundhara,prabhat,prabhat123,1,0
 6,Yujan,22,kapan,yujan123,yujan123,0,0
 10,Yujan,22,kapan,yujan,yujan123,0,0
+20,Satish,28,ktm,satish101,satish101,1,1
+25,abc,30,ktm,abc123,abc123,1,1
